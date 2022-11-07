@@ -1,8 +1,19 @@
 const firstDivNode = document.getElementById('main-content');
 const pinkdivNode = document.getElementById('pinkdiv');
 const daftPunkDivNode = document.getElementById('daftPunkDiv');
-const metallicaDivNode = document.getElementById('metallicaDiv')
+const metallicaDivNode = document.getElementById('metallicaDiv');
+const modalBodyNode = document.querySelector('.modal-body');
+const btnsongs = document.getElementById('btnsongs');
+let songlist;
 
+btnsongs.addEventListener('click', () => {
+    songlist.map((d, i) => {
+        let h5 = document.createElement('h5');
+        h5.innerText = `${i + 1}. ${d.album.title}`;
+        h5.className = 'border-bottom';
+        modalBodyNode.appendChild(h5);
+    })
+})
 pinkdivNode.addEventListener('click', () => {
     searchAPI('pink floyd');
 })
@@ -25,7 +36,7 @@ const searchAPI = (name) => {
         .then(response => {
             firstDivNode.innerHTML = '';
             const { data } = response;
-            console.log(data);
+            songlist = data;
             data.map((obj, i) => {
                 return firstDivNode.innerHTML +=
                     `<div class="col-sm-6 col-md-4 col-xl-3 px-1 mb-3 mb-sm-2 mb-md-0 mb-xl-2">
@@ -47,11 +58,10 @@ const searchAPI = (name) => {
         });
 }
 window.onload = () => {
-    firstDivNode.innerHTML = `
-    <div class="d-flex justify-content-center align-items-center">
-    <div class="d-flex spinner-border text-success" role="status">
-<span class="sr-only">Loading...</span>
-</div>
-</div>`
+    firstDivNode.innerHTML = `<div class="d-flex justify-content-center align-items-center">
+                                <div class="d-flex spinner-border text-success" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                              </div>`
     searchAPI('pink floyd');
 }
