@@ -1,0 +1,14 @@
+html,
+body {
+    height: 100vh;
+}
+
+.card {
+    height: 70vh;
+}
+
+.card-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
